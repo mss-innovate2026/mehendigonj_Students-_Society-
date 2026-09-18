@@ -27,7 +27,7 @@ export const Footer: React.FC<FooterProps> = ({ general, onOpenAdmin }) => {
                 {/* Logo Container on light background as required */}
                 <div className="w-12 h-12 bg-white rounded-2xl p-1 shadow-xs shrink-0 flex items-center justify-center">
                   <img
-                    src="/img_2_1789590956296.jpg"
+                    src={general.logoUrl || "/img_2_1789590956296.jpg"}
                     alt="MSS Official Logo"
                     className="w-full h-full object-contain rounded-xl"
                     referrerPolicy="no-referrer"

@@ -15,14 +15,13 @@ import { HeroSection } from './components/HeroSection';
 import { CompetitionSection } from './components/CompetitionSection';
 import { DayButtonsSection } from './components/DayButtonsSection';
 import { EditorialCompetitionFeed } from './components/EditorialCompetitionFeed';
+import { CampaignSection } from './components/CampaignSection';
+import { AboutSection } from './components/AboutSection';
 import { EventModal } from './components/EventModal';
 import { RegistrationModal } from './components/RegistrationModal';
 import { AdminModal } from './components/AdminModal';
-import {
-  Phone,
-  Settings,
-  Cloud,
-} from 'lucide-react';
+import { Footer } from './components/Footer';
+import { BottomNav, NavTab } from './components/BottomNav';
 
 export default function App() {
   const [festivalData, setFestivalData] = useState<FestivalData>(getStoredFestivalData());
@@ -30,6 +29,7 @@ export default function App() {
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
   const [registrationEventTitle, setRegistrationEventTitle] = useState('');
+  const [currentTab, setCurrentTab] = useState<NavTab>('home');
   const [syncStatus, setSyncStatus] = useState<SyncStatus>({
     state: 'syncing',
     message: 'Firebase ক্লাউডের সাথে যুক্ত হচ্ছে...',
@@ -73,7 +73,10 @@ export default function App() {
   };
 
   const handleNavigateSection = (sectionId: string) => {
-    const el = document.getElementById(sectionId);
+    let el = document.getElementById(sectionId);
+    if (!el && sectionId === 'timeline-section') {
+      el = document.getElementById('days-section');
+    }
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
     }
@@ -82,7 +85,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#f8faf9] font-['Plus_Jakarta_Sans',sans-serif] text-slate-800 flex flex-col selection:bg-emerald-200 selection:text-emerald-950 relative overflow-x-hidden">
       
-      {/* 1. HEADER */}
+      {/* 1. HEADER WITH 3-DOT MENU FOR ADMIN */}
       <Navbar
         logoUrl={festivalData.general.logoUrl}
         innovateLogoUrl={festivalData.general.innovateLogoUrl}
@@ -92,103 +95,87 @@ export default function App() {
         onNavigateSection={handleNavigateSection}
       />
 
-      {/* MAIN CONTAINER — Mobile-First Responsive Layout */}
-      <main className="grow max-w-2xl mx-auto w-full px-3.5 sm:px-5 py-3 sm:py-5 space-y-5 sm:space-y-6 relative z-10">
+      {/* MAIN CONTAINER — Mobile-First Responsive Layout with padding for bottom nav */}
+      <main className="grow max-w-2xl mx-auto w-full px-3.5 sm:px-5 py-3 sm:py-5 pb-24 space-y-5 sm:space-y-6 relative z-10">
         
-        {/* ============================================================ */}
-        {/* 1. HERO SECTION BANNER */}
-        {/* ============================================================ */}
+        {/* 1. HERO SECTION BANNER — Exactly matching user screenshot */}
         <HeroSection
           buttonSettings={festivalData.buttonSettings}
+          title="MSS INNOVATE 26"
+          subtitle="১৮–২২ অক্টোবর ২০২৬ • পাতারহাট, মেহেন্দীগঞ্জ"
         />
 
-        {/* ============================================================ */}
         {/* 2. 6 COMPETITIONS GRID (Poster Style with 2 columns) */}
-        {/* ============================================================ */}
         <CompetitionSection
           onSelectEvent={(eventId) => handleOpenEventById(eventId)}
           buttonSettings={festivalData.buttonSettings}
         />
 
-        {/* ============================================================ */}
         {/* 3. 5-DAY FESTIVAL SCHEDULE & TIMELINE */}
-        {/* ============================================================ */}
         <DayButtonsSection
           onSelectEvent={(eventId) => handleOpenEventById(eventId)}
           daysConfig={festivalData.daysSchedule}
           buttonSettings={festivalData.buttonSettings}
         />
 
-        {/* ============================================================ */}
         {/* 4. EDITORIAL COMPETITION MAGAZINE FEED */}
-        {/* ============================================================ */}
         <EditorialCompetitionFeed
           events={festivalData.events}
           onSelectEvent={(eventId) => handleOpenEventById(eventId)}
           buttonSettings={festivalData.buttonSettings}
         />
 
-        {/* ============================================================ */}
-        {/* FOOTER */}
-        {/* ============================================================ */}
-        <footer className="pt-6 pb-10 text-center space-y-3 border-t border-slate-200/80 mt-8">
-          <div className="flex items-center justify-center gap-3 text-xs font-bold text-slate-500 flex-wrap">
-            <button
-              onClick={() => setIsAdminOpen(true)}
-              className="hover:text-emerald-700 cursor-pointer text-xs inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 hover:bg-slate-200 transition-colors"
-            >
-              <Settings className="w-3.5 h-3.5 text-slate-600" />
-              <span>এডমিন প্যানেল</span>
-            </button>
-            <span>•</span>
-            <div className="inline-flex items-center gap-1 text-[11px] text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full font-bold">
-              <Cloud className="w-3 h-3 text-emerald-600" />
-              <span>Firebase ক্লাউড সিঙ্কড</span>
-            </div>
-            <span>•</span>
-            <a
-              href="tel:01731537457"
-              className="hover:text-emerald-800 text-xs inline-flex items-center gap-1 text-slate-600 font-bold"
-            >
-              <Phone className="w-3.5 h-3.5 text-emerald-600" />
-              <span>হেল্পলাইন: 01731537457</span>
-            </a>
-            <span>•</span>
-            <button
-              onClick={handleResetData}
-              className="hover:text-rose-600 cursor-pointer text-xs text-slate-400 transition-colors"
-            >
-              রিসেট
-            </button>
-          </div>
+        {/* 5. CAMPUS ROADSHOW CAMPAIGN REPORT */}
+        <CampaignSection
+          campaignDays={festivalData.campaignDays}
+          magazineInfo={festivalData.general.magazineInfo}
+          logoUrl={festivalData.general.logoUrl}
+          onSelectEventTab={() => handleNavigateSection('events-section')}
+        />
 
-          <p className="text-xs text-slate-400 font-medium">
-            মেহেন্দীগঞ্জ স্টুডেন্টস সোসাইটি (MSS) • ইনোভেট ২৬ মহোৎসব
-          </p>
-        </footer>
+        {/* 6. ABOUT MSS & MAGAZINE */}
+        <AboutSection
+          general={festivalData.general}
+        />
+
+        {/* 7. GORGEOUS FOOTER */}
+        <Footer
+          general={festivalData.general}
+          onOpenAdmin={() => setIsAdminOpen(true)}
+        />
 
       </main>
 
+      {/* 6. PERSISTENT BOTTOM NAVIGATION */}
+      <BottomNav
+        currentTab={currentTab}
+        onChangeTab={setCurrentTab}
+        onOpenAdmin={() => setIsAdminOpen(true)}
+      />
+
       {/* ============================================================ */}
-      {/* MODALS */}
+      {/* FULL SCREEN MODALS */}
       {/* ============================================================ */}
       
-      {/* 1. Event Rules & Benefits Modal */}
+      {/* 1. Event Rules & Benefits Full Screen Modal */}
       <EventModal
         event={selectedEvent}
         onClose={() => setSelectedEvent(null)}
+        onOpenRegistration={handleOpenRegistration}
         buttonSettings={festivalData.buttonSettings}
+        logoUrl={festivalData.general.logoUrl}
       />
 
-      {/* 2. Interactive Registration Modal */}
+      {/* 2. Interactive Registration Full Screen Modal */}
       <RegistrationModal
         isOpen={isRegistrationOpen}
         defaultEventTitle={registrationEventTitle}
         onClose={() => setIsRegistrationOpen(false)}
         buttonSettings={festivalData.buttonSettings}
+        logoUrl={festivalData.general.logoUrl}
       />
 
-      {/* 3. Live Admin Editor Modal */}
+      {/* 3. Live Admin Editor Full Screen Modal (Password: muhin@1234) */}
       <AdminModal
         isOpen={isAdminOpen}
         festivalData={festivalData}

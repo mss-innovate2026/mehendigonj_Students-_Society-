@@ -18,7 +18,7 @@ interface AboutSectionProps {
 
 export const AboutSection: React.FC<AboutSectionProps> = ({ general }) => {
   return (
-    <div className="space-y-4">
+    <div id="about-section" className="space-y-4">
       {/* Organization Card with High Contrast Clean Backdrop for Logo */}
       <div className="bg-white rounded-2xl p-5 border border-emerald-100 shadow-2xs space-y-4">
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
@@ -26,7 +26,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ general }) => {
           {/* Logo Container on pristine white backdrop as required */}
           <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-white p-2 border-2 border-emerald-200 shadow-xs shrink-0 flex items-center justify-center">
             <img
-              src="/img_2_1789590956296.jpg"
+              src={general.logoUrl || '/img_2_1789590956296.jpg'}
               alt="Mehendiganj Students' Society Logo"
               className="w-full h-full object-contain rounded-xl"
               referrerPolicy="no-referrer"

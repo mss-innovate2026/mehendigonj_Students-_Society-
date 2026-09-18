@@ -24,7 +24,7 @@ export const AboutModal: React.FC<AboutModalProps> = ({
           <div className="flex items-center gap-2.5">
             <div className="w-10 h-10 rounded-2xl bg-white p-1 shrink-0 flex items-center justify-center">
               <img
-                src="/img_2_1789590956296.jpg"
+                src={general.logoUrl || '/img_2_1789590956296.jpg'}
                 alt="MSS"
                 className="w-full h-full object-contain rounded-xl"
                 referrerPolicy="no-referrer"

@@ -1,5 +1,6 @@
 import React from 'react';
-import { FestivalGeneralInfo } from '../data/flyerStorage';
+import { FestivalGeneralInfo, ButtonSettings, DEFAULT_BUTTON_SETTINGS } from '../data/flyerStorage';
+import { getFontFamilyClass } from '../utils/buttonStyles';
 import {
   MapPin,
   Calendar,
@@ -18,13 +19,17 @@ interface FestivalHeroProps {
   general: FestivalGeneralInfo;
   eventCount: number;
   onNavigateSection: (sectionId: string) => void;
+  buttonSettings?: ButtonSettings;
 }
 
 export const FestivalHero: React.FC<FestivalHeroProps> = ({
   general,
   eventCount,
   onNavigateSection,
+  buttonSettings = DEFAULT_BUTTON_SETTINGS,
 }) => {
+  const fontClass = getFontFamilyClass(buttonSettings.fontFamily);
+
   return (
     <section id="hero-section" className="relative rounded-3xl overflow-hidden border border-slate-200/80 shadow-sm bg-white">
       {/* Decorative gradient canvas header */}
@@ -62,7 +67,7 @@ export const FestivalHero: React.FC<FestivalHeroProps> = ({
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-md">
               <div className="w-6 h-6 rounded-lg bg-white p-0.5 shrink-0 flex items-center justify-center">
                 <img
-                  src="/img_2_1789590956296.jpg"
+                  src={general.logoUrl || '/img_2_1789590956296.jpg'}
                   alt="MSS"
                   className="w-full h-full object-contain rounded"
                   referrerPolicy="no-referrer"
@@ -137,7 +142,7 @@ export const FestivalHero: React.FC<FestivalHeroProps> = ({
             <div className="relative w-full max-w-sm rounded-2xl overflow-hidden bg-slate-950/80 p-2 border border-white/20 shadow-xl group">
               <div className="rounded-xl overflow-hidden bg-slate-900 aspect-video flex items-center justify-center relative">
                 <img
-                  src="/IMG_20260917_023628.jpg"
+                  src={general.innovateLogoUrl || '/IMG_20260917_023628.jpg'}
                   alt="INNOVATE 26 Official Poster Emblem"
                   className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
                 />

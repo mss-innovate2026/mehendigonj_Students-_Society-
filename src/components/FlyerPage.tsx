@@ -13,7 +13,15 @@ import {
   QrCode
 } from 'lucide-react';
 
-export const FlyerPage: React.FC = () => {
+interface FlyerPageProps {
+  logoUrl?: string;
+  innovateLogoUrl?: string;
+}
+
+export const FlyerPage: React.FC<FlyerPageProps> = ({
+  logoUrl = '/img_2_1789590956296.jpg',
+  innovateLogoUrl = '/IMG_20260917_023628.jpg',
+}) => {
   const events = [
     {
       id: 'quiz',
@@ -122,7 +130,7 @@ export const FlyerPage: React.FC = () => {
         <div className="max-w-4xl mx-auto flex items-center justify-between text-xs font-semibold">
           <div className="flex items-center gap-2">
             <img
-              src="/img_2_1789590956296.jpg"
+              src={logoUrl || '/img_2_1789590956296.jpg'}
               alt="MSS Logo"
               className="w-6 h-6 object-contain rounded-full bg-white p-0.5"
             />
@@ -149,7 +157,7 @@ export const FlyerPage: React.FC = () => {
           <div className="flex justify-center">
             <div className="p-2 max-w-[320px] sm:max-w-[400px]">
               <img
-                src="/IMG_20260917_023628.jpg"
+                src={innovateLogoUrl || '/IMG_20260917_023628.jpg'}
                 alt="INNOVATE 26 - Prove Your Knowledge"
                 className="w-full h-auto object-contain mx-auto"
               />

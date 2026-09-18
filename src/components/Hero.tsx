@@ -23,6 +23,7 @@ interface HeroProps {
   onOpenRegister: (eventName?: string) => void;
   onGoToSchedule: () => void;
   onSelectEvent?: (event: EventItem) => void;
+  logoUrl?: string;
 }
 
 export const Hero: React.FC<HeroProps> = ({
@@ -30,6 +31,7 @@ export const Hero: React.FC<HeroProps> = ({
   onOpenRegister,
   onGoToSchedule,
   onSelectEvent,
+  logoUrl = '/img_2_1789590956296.jpg',
 }) => {
   const [timeLeft, setTimeLeft] = useState(calculateTimeRemaining());
 
@@ -162,7 +164,7 @@ export const Hero: React.FC<HeroProps> = ({
           {/* MSS Official Badge */}
           <div className="inline-flex items-center gap-2 bg-white px-3.5 py-1.5 rounded-full border border-[#D9D3C3] shadow-2xs">
             <img
-              src="/img_2_1789590956296.jpg"
+              src={logoUrl || '/img_2_1789590956296.jpg'}
               alt="MSS"
               className="w-5 h-5 object-contain rounded-full bg-slate-50 p-0.5"
               referrerPolicy="no-referrer"

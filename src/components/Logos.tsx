@@ -5,12 +5,14 @@ interface LogoProps {
   size?: 'sm' | 'md' | 'lg' | 'xl';
   showText?: boolean;
   inverted?: boolean;
+  logoUrl?: string;
 }
 
 export const MssLogo: React.FC<LogoProps> = ({ 
   className = '', 
   size = 'md', 
-  showText = true 
+  showText = true,
+  logoUrl = '/img_2_1789590956296.jpg'
 }) => {
   const [hasError, setHasError] = useState(false);
 
@@ -26,7 +28,7 @@ export const MssLogo: React.FC<LogoProps> = ({
       <div className={`relative flex items-center justify-center shrink-0 ${dimensionClasses} overflow-hidden rounded-lg bg-white`}>
         {!hasError ? (
           <img
-            src="/img_2_1789590956296.jpg"
+            src={logoUrl || '/img_2_1789590956296.jpg'}
             alt="Mehendiganj Students' Society Logo"
             className="w-full h-full object-contain p-0.5"
             referrerPolicy="no-referrer"

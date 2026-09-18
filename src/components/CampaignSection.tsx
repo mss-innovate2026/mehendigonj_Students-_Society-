@@ -17,12 +17,14 @@ interface CampaignSectionProps {
   campaignDays: CampaignDay[];
   magazineInfo?: string;
   onSelectEventTab?: () => void;
+  logoUrl?: string;
 }
 
 export const CampaignSection: React.FC<CampaignSectionProps> = ({
   campaignDays,
   magazineInfo,
   onSelectEventTab,
+  logoUrl = '/img_2_1789590956296.jpg',
 }) => {
   const [activeDayId, setActiveDayId] = useState<string>(campaignDays[0]?.id || 'day-1');
 
@@ -41,7 +43,7 @@ export const CampaignSection: React.FC<CampaignSectionProps> = ({
         <div className="flex items-center gap-3">
           <div className="w-11 h-11 rounded-xl bg-white p-1 border border-emerald-200 shadow-2xs shrink-0">
             <img
-              src="/img_2_1789590956296.jpg"
+              src={logoUrl || '/img_2_1789590956296.jpg'}
               alt="MSS Logo"
               className="w-full h-full object-contain rounded-lg"
               referrerPolicy="no-referrer"
