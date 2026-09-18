@@ -1,7 +1,7 @@
 import React from 'react';
 import { Home, Trophy, Bus, Calendar, BookMarked, Settings, Phone } from 'lucide-react';
 
-export type NavTab = 'home' | 'events' | 'campaign' | 'timeline' | 'about' | 'admin' | 'contact';
+export type NavTab = 'home' | 'events' | 'timeline' | 'contact' | 'admin';
 
 interface BottomNavProps {
   currentTab: NavTab;
@@ -26,29 +26,19 @@ export const BottomNav: React.FC<BottomNavProps> = ({
       icon: Trophy,
     },
     {
-      id: 'campaign' as NavTab,
-      label: 'রোডশো',
-      icon: Bus,
-    },
-    {
       id: 'timeline' as NavTab,
       label: 'সময়সূচি',
       icon: Calendar,
     },
     {
-      id: 'about' as NavTab,
-      label: 'ম্যাগাজিন',
-      icon: BookMarked,
+      id: 'contact' as NavTab,
+      label: 'যোগাযোগ',
+      icon: Phone,
     },
     {
       id: 'admin' as NavTab,
       label: 'এডমিন',
       icon: Settings,
-    },
-    {
-      id: 'contact' as NavTab,
-      label: 'যোগাযোগ',
-      icon: Phone,
     },
   ];
 
@@ -63,14 +53,8 @@ export const BottomNav: React.FC<BottomNavProps> = ({
     } else if (tabId === 'events') {
       const el = document.getElementById('events-section');
       if (el) el.scrollIntoView({ behavior: 'smooth' });
-    } else if (tabId === 'campaign') {
-      const el = document.getElementById('campaign-section');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
     } else if (tabId === 'timeline') {
-      const el = document.getElementById('timeline-section');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    } else if (tabId === 'about') {
-      const el = document.getElementById('about-section');
+      const el = document.getElementById('days-section') || document.getElementById('timeline-section');
       if (el) el.scrollIntoView({ behavior: 'smooth' });
     } else if (tabId === 'contact') {
       const el = document.getElementById('contact-section');

@@ -15,8 +15,6 @@ import { HeroSection } from './components/HeroSection';
 import { CompetitionSection } from './components/CompetitionSection';
 import { DayButtonsSection } from './components/DayButtonsSection';
 import { EditorialCompetitionFeed } from './components/EditorialCompetitionFeed';
-import { CampaignSection } from './components/CampaignSection';
-import { AboutSection } from './components/AboutSection';
 import { EventModal } from './components/EventModal';
 import { RegistrationModal } from './components/RegistrationModal';
 import { AdminModal } from './components/AdminModal';
@@ -125,23 +123,12 @@ export default function App() {
           buttonSettings={festivalData.buttonSettings}
         />
 
-        {/* 5. CAMPUS ROADSHOW CAMPAIGN REPORT */}
-        <CampaignSection
-          campaignDays={festivalData.campaignDays}
-          magazineInfo={festivalData.general.magazineInfo}
-          logoUrl={festivalData.general.logoUrl}
-          onSelectEventTab={() => handleNavigateSection('events-section')}
-        />
-
-        {/* 6. ABOUT MSS & MAGAZINE */}
-        <AboutSection
-          general={festivalData.general}
-        />
-
-        {/* 7. GORGEOUS FOOTER */}
+        {/* 5. GORGEOUS FOOTER (Matching dark theme with main logo) */}
         <Footer
           general={festivalData.general}
           onOpenAdmin={() => setIsAdminOpen(true)}
+          onOpenRegistration={() => handleOpenRegistration()}
+          onNavigateSection={handleNavigateSection}
         />
 
       </main>
