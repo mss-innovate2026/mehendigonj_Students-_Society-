@@ -1,0 +1,39 @@
+{
+  "entities": {
+    "FestivalConfig": {
+      "collection": "festivals",
+      "description": "Stores the festival configuration including general info, schedule, events, campaign days, and button customization.",
+      "fields": {
+        "general": { "type": "map", "description": "General festival information and logos" },
+        "campaignDays": { "type": "array", "description": "Campaign days information" },
+        "events": { "type": "array", "description": "Festival competition events" },
+        "buttonSettings": { "type": "map", "description": "Customized styles and settings for buttons" },
+        "daysSchedule": { "type": "array", "description": "5-day event timeline and schedule" },
+        "updatedAt": { "type": "timestamp", "description": "Timestamp of last update" },
+        "updatedBy": { "type": "string", "description": "Identifier of the admin user who updated" }
+      }
+    },
+    "Registration": {
+      "collection": "registrations",
+      "description": "Stores student and team registrations for festival events.",
+      "fields": {
+        "studentName": { "type": "string", "description": "Name of the participant" },
+        "schoolName": { "type": "string", "description": "School or institution" },
+        "className": { "type": "string", "description": "Class or grade" },
+        "phone": { "type": "string", "description": "Contact phone number" },
+        "events": { "type": "array", "description": "Selected competition event IDs" },
+        "createdAt": { "type": "timestamp", "description": "Timestamp of registration" }
+      }
+    },
+    "ContactMessage": {
+      "collection": "contact_messages",
+      "description": "Stores inquiries and messages sent by visitors.",
+      "fields": {
+        "name": { "type": "string", "description": "Sender name" },
+        "email": { "type": "string", "description": "Sender email or phone" },
+        "message": { "type": "string", "description": "Message content" },
+        "createdAt": { "type": "timestamp", "description": "Submission time" }
+      }
+    }
+  }
+}

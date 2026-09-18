@@ -1,0 +1,6 @@
+{
+  "name": "INNOVATE 26 — Mehendiganj Students' Society",
+  "description": "Official event website and schedule for INNOVATE 26 (18–22 October 2026) organized by Mehendiganj Students' Society at Govt. Patarhat Muslim Model High School.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

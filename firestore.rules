@@ -1,0 +1,35 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Festival settings and information
+    // Publicly readable so all festival visitors can view live schedule, events & logos
+    // Writable by users to persist admin changes to the cloud
+    match /festivals/{festivalId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Student registrations
+    match /registrations/{regId} {
+      allow read: if true;
+      allow create: if request.resource.data.studentName is string
+                    && request.resource.data.phone is string;
+      allow update, delete: if true;
+    }
+
+    // Contact messages & inquiries
+    match /contact_messages/{msgId} {
+      allow read: if true;
+      allow create: if request.resource.data.name is string
+                    && request.resource.data.message is string;
+      allow update, delete: if true;
+    }
+
+    // Default deny for unspecified paths
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
