@@ -14,8 +14,10 @@ import {
   Lightbulb,
   Phone,
   ShieldCheck,
-  Award
+  Award,
+  MessageCircle
 } from 'lucide-react';
+import { getWhatsAppUrl } from '../utils/whatsapp';
 
 interface EventModalProps {
   event: FestivalEvent | null;
@@ -262,9 +264,10 @@ export const EventModal: React.FC<EventModalProps> = ({
                   onClose();
                   onOpenRegistration(event.title);
                 }}
-                className={`px-4 py-2 rounded-xl font-black text-xs shadow-md transition-all cursor-pointer active:scale-95 ${styles.buttonBg}`}
+                className={`px-4 py-2 rounded-xl font-black text-xs shadow-md transition-all cursor-pointer active:scale-95 inline-flex items-center gap-1.5 ${styles.buttonBg}`}
               >
-                নিবন্ধন করুন
+                <MessageCircle className="w-3.5 h-3.5 fill-current" />
+                <span>ইভেন্টে অংশ নিন (হোয়াটসঅ্যাপ)</span>
               </button>
             )}
 

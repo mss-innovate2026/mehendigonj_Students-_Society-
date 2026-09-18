@@ -12,8 +12,10 @@ import {
   ShieldCheck,
   Calendar,
   Trophy,
-  Sparkles
+  Sparkles,
+  MessageCircle
 } from 'lucide-react';
+import { getWhatsAppUrl } from '../utils/whatsapp';
 
 interface FooterProps {
   general: FestivalGeneralInfo;
@@ -28,17 +30,24 @@ export const Footer: React.FC<FooterProps> = ({
   onOpenRegistration,
   onNavigateSection,
 }) => {
+  const whatsappUrl = getWhatsAppUrl(
+    general.phone,
+    'আসসালামু আলাইকুম। আমি MSS INNOVATE 26 ইভেন্টে অংশ নিতে যোগাযোগ করছি। বিস্তারিত ও রেজিস্ট্রেশন সম্পন্ন করতে চাই।'
+  );
+
   return (
     <footer id="contact-section" className="space-y-4 pt-4 pb-20 sm:pb-8">
-      {/* 1. TOP FLOATING ACTION BAR (Exact match to screenshot 1 top bar) */}
+      {/* 1. TOP FLOATING ACTION BAR (ইভেন্টে অংশ নিন opens WhatsApp directly) */}
       <div className="bg-[#0b1422] rounded-2xl p-3.5 sm:p-4 border border-slate-800 shadow-xl flex items-center justify-between gap-3">
-        <button
-          onClick={onOpenRegistration}
-          className="flex-1 py-3 px-4 rounded-xl bg-rose-600 hover:bg-rose-500 active:scale-95 text-white font-bold text-center text-xs sm:text-sm shadow-md transition-all cursor-pointer flex items-center justify-center gap-1.5"
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-1 py-3 px-4 rounded-xl bg-rose-600 hover:bg-rose-500 active:scale-95 text-white font-bold text-center text-xs sm:text-sm shadow-md transition-all cursor-pointer flex items-center justify-center gap-2"
         >
-          <Sparkles className="w-4 h-4 text-white shrink-0" />
+          <MessageCircle className="w-4 h-4 fill-white text-white shrink-0" />
           <span>ইভেন্টে অংশ নিন</span>
-        </button>
+        </a>
 
         <a
           href={`tel:${general.phone}`}
@@ -153,13 +162,15 @@ export const Footer: React.FC<FooterProps> = ({
               <span>পূর্ণ ৫ দিনব্যাপী উৎসবের সময়সূচি (১৮–২২ অক্টোবর)</span>
             </div>
 
-            <div
-              onClick={onOpenRegistration}
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-2 hover:text-emerald-400 transition-colors cursor-pointer"
             >
-              <ChevronRight className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-              <span>অনলাইন রেজিস্ট্রেশন ও তাৎক্ষণিক কনফার্মেশন</span>
-            </div>
+              <MessageCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+              <span>ইভেন্টে অংশগ্রহণ ও রেজিস্ট্রেশন (হোয়াটসঅ্যাপ)</span>
+            </a>
 
             <div className="flex items-center gap-2 text-slate-300">
               <ChevronRight className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
